@@ -1,0 +1,96 @@
+{
+    "user": {
+        "name": "Rifqi",
+        "location": "Subang, Jawa Barat",
+        "avatar": "R"
+    },
+    "categories": [
+        {
+            "id": "1",
+            "label": "Listrik",
+            "icon": "⚡"
+        },
+        {
+            "id": "2",
+            "label": "Teknisi AC",
+            "icon": "❄️"
+        },
+        {
+            "id": "3",
+            "label": "Komputer",
+            "icon": "🖥️"
+        },
+        {
+            "id": "4",
+            "label": "Les Privat",
+            "icon": "📚"
+        },
+        {
+            "id": "5",
+            "label": "Desain",
+            "icon": "🎨"
+        },
+        {
+            "id": "6",
+            "label": "Desain",
+            "icon": "🎨"
+        }
+    ],
+    "nearby_services": [
+        {
+            "id": "1",
+            "name": "Samid Teknisi AC",
+            "description": "Teknisi AC & Kulkas",
+            "distance": 0.8,
+            "rating": 4.9,
+            "review_count": 123,
+            "price": 100000,
+            "is_verified": true,
+            "icon": "❄️"
+        },
+        {
+            "id": "2",
+            "name": "Dimas Tukang Listrik",
+            "description": "Instalasi & Perbaikan Listrik",
+            "distance": 2.1,
+            "rating": 4.7,
+            "review_count": 87,
+            "price": 75000,
+            "is_verified": false,
+            "icon": "⚡"
+        },
+        {
+            "id": "3",
+            "name": "Indra Service Laptop",
+            "description": "Service Laptop & Komputer",
+            "distance": 3.2,
+            "rating": 4.8,
+            "review_count": 56,
+            "price": 150000,
+            "is_verified": true,
+            "icon": "💻"
+        },
+        {
+            "id": "4",
+            "name": "Budi Les Matematika",
+            "description": "Les Privat SD, SMP, SMA",
+            "distance": 1.5,
+            "rating": 4.6,
+            "review_count": 44,
+            "price": 80000,
+            "is_verified": false,
+            "icon": "📚"
+        },
+        {
+            "id": "5",
+            "name": "Rina Studio Desain",
+            "description": "Desain Logo & Branding",
+            "distance": 4.0,
+            "rating": 4.5,
+            "review_count": 31,
+            "price": 200000,
+            "is_verified": true,
+            "icon": "🎨"
+        }
+    ]
+}
