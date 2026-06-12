@@ -118,7 +118,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(filterActive),
-            const SizedBox(height: 12),
             _buildSearchBar(notifier),
             const SizedBox(height: 12),
             _buildSortAndMapToggle(state, notifier),
@@ -138,7 +137,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
 
   Widget _buildHeader(bool filterActive) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Row(
         children: [
           IconBtn(icon: Icons.arrow_back, onTap: () => Navigator.maybePop(context)),
@@ -179,7 +178,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
 
   Widget _buildSearchBar(SearchNotifier notifier) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       child: Container(
         height: 52,
         decoration: BoxDecoration(
@@ -228,7 +227,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
         children: [
           SortChip(
             label: 'Terdekat',
-            icon: Icons.location_on_rounded,
+            icon: Icons.location_on_outlined,
             isSelected: state.sortType == SearchSortType.nearest,
             onTap: () => notifier.setSortType(SearchSortType.nearest),
           ),
