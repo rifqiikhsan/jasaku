@@ -16,7 +16,7 @@ class ServiceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
       child: Column(
         children: [
           Row(
@@ -30,7 +30,9 @@ class ServiceSection extends StatelessWidget {
                   color: Color(0xFF1A1A1A),
                 ),
               ),
-              GestureDetector(
+              InkWell(
+                splashColor: Colors.blue.withValues(alpha: 0.2),
+                highlightColor: Colors.blue.withValues(alpha: 0.1),
                 onTap: () {},
                 child: const Text(
                   'Lihat Semua',
@@ -52,9 +54,7 @@ class ServiceSection extends StatelessWidget {
               ),
             )
           else
-            ...services
-                .map((s) => ServiceCard(service: s, onTap: () {}))
-                .toList(),
+            ...services.map((s) => ServiceCard(service: s, onTap: () {})),
         ],
       ),
     );

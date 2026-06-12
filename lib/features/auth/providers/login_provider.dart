@@ -37,9 +37,7 @@ class LoginState {
       password: password ?? this.password,
       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage == _sentinel
-          ? this.errorMessage
-          : errorMessage as String?,
+      errorMessage: errorMessage == _sentinel ? this.errorMessage : errorMessage as String?,
     );
   }
 }
@@ -54,16 +52,32 @@ class LoginNotifier extends Notifier<LoginState> {
 
   void setPassword(String value) => state = state.copyWith(password: value);
 
-  void togglePasswordVisibility() =>
-      state = state.copyWith(isPasswordVisible: !state.isPasswordVisible);
+  void togglePasswordVisibility() => state = state.copyWith(isPasswordVisible: !state.isPasswordVisible);
 
   Future<void> login(VoidCallback onSuccess) async {
     if (state.email.isEmpty || state.password.isEmpty) {
-      state = state.copyWith(errorMessage: 'Email dan kata sandi wajib diisi');
+      state = state.copyWith(
+        errorMessage: 'Email dan kata sandi wajib diisi',
+      );
       return;
     }
 
-    state = state.copyWith(isLoading: true, errorMessage: null);
+    // ignore: deprecated_member_use
+    final emailRegex = RegExp(
+      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+    );
+
+    if (!emailRegex.hasMatch(state.email.trim())) {
+      state = state.copyWith(
+        errorMessage: 'Format email tidak valid',
+      );
+      return;
+    }
+
+    state = state.copyWith(
+      isLoading: true,
+      errorMessage: null,
+    );
 
     await Future.delayed(const Duration(seconds: 2));
 

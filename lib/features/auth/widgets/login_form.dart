@@ -29,9 +29,7 @@ class LoginForm extends ConsumerWidget {
           onChanged: notifier.setPassword,
           suffixIcon: IconButton(
             icon: Icon(
-              state.isPasswordVisible
-                  ? Icons.visibility_outlined
-                  : Icons.visibility_off_outlined,
+              state.isPasswordVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
               color: AppTheme.textHint,
               size: 20,
             ),
@@ -41,16 +39,21 @@ class LoginForm extends ConsumerWidget {
         const SizedBox(height: 10),
         Align(
           alignment: Alignment.centerRight,
-          child: GestureDetector(
-            onTap: () {
-              // TODO: navigasi ke forgot password
-            },
-            child: const Text(
-              'Lupa Kata Sandi',
-              style: TextStyle(
-                color: AppTheme.accent,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.blue.withValues(alpha: 0.2),
+              highlightColor: Colors.blue.withValues(alpha: 0.1),
+              onTap: () {
+                // TODO: navigasi ke forgot password
+              },
+              child: const Text(
+                'Lupa Kata Sandi',
+                style: TextStyle(
+                  color: AppTheme.accent,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

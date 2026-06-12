@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jasaku/app/theme.dart';
 
 class CategoryItem extends StatelessWidget {
   final String icon;
@@ -14,33 +15,42 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Container(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(16),
+          splashColor: AppTheme.accent.withValues(alpha: 0.2),
+          highlightColor: AppTheme.accent.withValues(alpha: 0.1),
+          onTap: onTap,
+          child: Ink(
             width: 64,
             height: 64,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFEEEEEE)),
+              border: Border.all(
+                color: const Color(0xFFEEEEEE),
+              ),
             ),
             child: Center(
-              child: Text(icon, style: const TextStyle(fontSize: 28)),
+              child: Text(
+                icon,
+                style: const TextStyle(fontSize: 28),
+              ),
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF333333),
-              fontWeight: FontWeight.w500,
-            ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Color(0xFF333333),
+            fontWeight: FontWeight.w500,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

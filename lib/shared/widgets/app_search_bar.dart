@@ -28,10 +28,13 @@ class AppSearchBar extends StatelessWidget {
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        prefixIcon: Image.asset(
-          'assets/icons/search_icon.png',
-          width: 20,
-          height: 20,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Image.asset(
+            'assets/icons/search_icon.png',
+            width: 20,
+            height: 20,
+          ),
         ),
         filled: true,
         fillColor: Colors.white,

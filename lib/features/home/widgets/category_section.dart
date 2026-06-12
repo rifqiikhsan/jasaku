@@ -11,7 +11,7 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Column(
         children: [
           Row(
@@ -25,7 +25,9 @@ class CategorySection extends StatelessWidget {
                   color: Color(0xFF1A1A1A),
                 ),
               ),
-              GestureDetector(
+              InkWell(
+                splashColor: Colors.blue.withValues(alpha: 0.2),
+                highlightColor: Colors.blue.withValues(alpha: 0.1),
                 onTap: () {},
                 child: const Text(
                   'Lihat Semua',
@@ -41,10 +43,7 @@ class CategorySection extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: categories
-                .take(5)
-                .map((c) => CategoryItem(icon: c.icon, label: c.label))
-                .toList(),
+            children: categories.take(5).map((c) => CategoryItem(icon: c.icon, label: c.label, onTap: () {})).toList(),
           ),
         ],
       ),
