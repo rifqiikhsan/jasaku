@@ -20,7 +20,8 @@ class SearchScreen extends ConsumerStatefulWidget {
   ConsumerState<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerProviderStateMixin {
+class _SearchScreenState extends ConsumerState<SearchScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _controller = TextEditingController();
   final MapController _mapController = MapController();
 
@@ -40,9 +41,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
       duration: const Duration(milliseconds: 280),
       value: 1.0,
     );
-    _mapHeight = Tween<double>(begin: 0, end: _mapExpandedHeight).animate(
-      CurvedAnimation(parent: _mapAnim, curve: Curves.easeInOut),
-    );
+    _mapHeight = Tween<double>(
+      begin: 0,
+      end: _mapExpandedHeight,
+    ).animate(CurvedAnimation(parent: _mapAnim, curve: Curves.easeInOut));
   }
 
   @override
@@ -64,11 +66,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
     Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        pageBuilder: (_, __, ___) => FullscreenMapPage(
-          providers: providers,
-          center: _subangCenter,
-        ),
-        transitionsBuilder: (_, anim, __, child) => FadeTransition(opacity: anim, child: child),
+        pageBuilder: (_, __, ___) =>
+            FullscreenMapPage(providers: providers, center: _subangCenter),
+        transitionsBuilder: (_, anim, __, child) =>
+            FadeTransition(opacity: anim, child: child),
       ),
     );
   }
@@ -97,7 +98,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
         height: 34,
         child: DistanceBubble(
           distanceKm: p.distanceKm,
-          color: p.distanceKm <= 1.0 ? AppTheme.primary : const Color(0xFFE63946),
+          color: p.distanceKm <= 1.0
+              ? AppTheme.primary
+              : const Color(0xFFE63946),
         ),
       );
     }).toList();
@@ -140,7 +143,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Row(
         children: [
-          IconBtn(icon: Icons.arrow_back, onTap: () => Navigator.maybePop(context)),
+          IconBtn(
+            icon: Icons.arrow_back,
+            onTap: () => Navigator.maybePop(context),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -201,17 +207,27 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
               child: TextField(
                 controller: _controller,
                 onChanged: notifier.onQueryChanged,
-                style: GoogleFonts.poppins(fontSize: 14, color: const Color(0xFF1A1A2E)),
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: const Color(0xFF1A1A2E),
+                ),
                 decoration: InputDecoration(
                   hintText: 'Teknisi AC Di Subang...',
-                  hintStyle: GoogleFonts.poppins(color: AppTheme.textHint, fontSize: 14),
+                  hintStyle: GoogleFonts.poppins(
+                    color: AppTheme.textHint,
+                    fontSize: 14,
+                  ),
                   border: InputBorder.none,
                   isDense: true,
                 ),
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.mic_none_rounded, color: AppTheme.textHint, size: 22),
+              icon: const Icon(
+                Icons.mic_none_rounded,
+                color: AppTheme.textHint,
+                size: 22,
+              ),
               onPressed: () {},
             ),
           ],
@@ -252,16 +268,22 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
               duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
-                color: state.isMapVisible ? AppTheme.primary.withValues(alpha: 0.1) : Colors.white,
+                color: state.isMapVisible
+                    ? AppTheme.primary.withValues(alpha: 0.1)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: state.isMapVisible ? AppTheme.primary : const Color(0xFFDDE1EA),
+                  color: state.isMapVisible
+                      ? AppTheme.primary
+                      : const Color(0xFFDDE1EA),
                 ),
               ),
               child: Icon(
                 state.isMapVisible ? Icons.map : Icons.map_outlined,
                 size: 18,
-                color: state.isMapVisible ? AppTheme.primary : const Color(0xFF6B7280),
+                color: state.isMapVisible
+                    ? AppTheme.primary
+                    : const Color(0xFF6B7280),
               ),
             ),
           ),
@@ -290,7 +312,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
                     ),
                     children: [
                       TileLayer(
-                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                         userAgentPackageName: 'com.jasaku.app',
                       ),
                       MarkerLayer(markers: _buildMarkers(state.results)),
@@ -302,13 +325,16 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
                     child: GestureDetector(
                       onTap: () => _openFullscreenMap(state.results),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.12),
+                              color: Colors.black.withValues(alpha: 0.12),
                               blurRadius: 6,
                             ),
                           ],
@@ -316,7 +342,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.open_in_full, size: 13, color: Color(0xFF1A1A2E)),
+                            const Icon(
+                              Icons.open_in_full,
+                              size: 13,
+                              color: Color(0xFF1A1A2E),
+                            ),
                             const SizedBox(width: 5),
                             Text(
                               'Lihat Peta',
@@ -354,9 +384,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
               padding: const EdgeInsets.only(left: 6),
               child: ActiveFilterBadge(
                 label: '≥ ${state.filter.minRating.toStringAsFixed(1)} ★',
-                onRemove: () => notifier.applyFilter(
-                  state.filter.copyWith(minRating: 0.0),
-                ),
+                onRemove: () =>
+                    notifier.applyFilter(state.filter.copyWith(minRating: 0.0)),
               ),
             ),
           const Spacer(),
@@ -411,11 +440,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> with SingleTickerPr
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.search_off_rounded, size: 52, color: AppTheme.textHint.withOpacity(0.4)),
+              Icon(
+                Icons.search_off_rounded,
+                size: 52,
+                color: AppTheme.textHint.withValues(alpha: 0.4),
+              ),
               const SizedBox(height: 12),
               Text(
                 'Tidak ada hasil ditemukan.',
-                style: GoogleFonts.poppins(color: AppTheme.textHint, fontSize: 14),
+                style: GoogleFonts.poppins(
+                  color: AppTheme.textHint,
+                  fontSize: 14,
+                ),
               ),
             ],
           ),

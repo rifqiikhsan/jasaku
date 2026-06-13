@@ -8,7 +8,9 @@ class ServiceCard extends StatelessWidget {
 
   const ServiceCard({super.key, required this.provider});
 
-  String _fmt(int price) => price >= 1000 ? '${(price / 1000).toStringAsFixed(0)}rb' : price.toString();
+  String _fmt(int price) => price >= 1000
+      ? '${(price / 1000).toStringAsFixed(0)}rb'
+      : price.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ServiceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -67,7 +69,11 @@ class ServiceCard extends StatelessWidget {
                       const SizedBox(width: 8),
                       Row(
                         children: [
-                          const Icon(Icons.location_on, size: 13, color: Colors.redAccent),
+                          const Icon(
+                            Icons.location_on,
+                            size: 13,
+                            color: Colors.redAccent,
+                          ),
                           const SizedBox(width: 2),
                           Text(
                             '${provider.distanceKm} km',
@@ -100,7 +106,10 @@ class ServiceCard extends StatelessWidget {
                     children: provider.tags
                         .map(
                           (t) => Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 9,
+                              vertical: 3,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFFF0F2F7),
                               borderRadius: BorderRadius.circular(6),
@@ -146,7 +155,10 @@ class ServiceCard extends StatelessWidget {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 7,
+                          ),
                           decoration: BoxDecoration(
                             color: AppTheme.primary,
                             borderRadius: BorderRadius.circular(10),

@@ -47,7 +47,9 @@ class FullscreenMapPage extends StatelessWidget {
                     height: 34,
                     child: DistanceBubble(
                       distanceKm: p.distanceKm,
-                      color: p.distanceKm <= 1.0 ? AppTheme.primary : const Color(0xFFE63946),
+                      color: p.distanceKm <= 1.0
+                          ? AppTheme.primary
+                          : const Color(0xFFE63946),
                     ),
                   );
                 }).toList(),
@@ -71,24 +73,31 @@ class FullscreenMapPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
+                            color: Colors.black.withValues(alpha: 0.15),
                             blurRadius: 8,
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.close, size: 20, color: Color(0xFF1A1A2E)),
+                      child: const Icon(
+                        Icons.close,
+                        size: 20,
+                        color: Color(0xFF1A1A2E),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 8,
                           ),
                         ],
@@ -150,7 +159,8 @@ class FullscreenMapPage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: providers.length,
                       separatorBuilder: (_, __) => const SizedBox(width: 10),
-                      itemBuilder: (_, i) => _ProviderMiniCard(provider: providers[i]),
+                      itemBuilder: (_, i) =>
+                          _ProviderMiniCard(provider: providers[i]),
                     ),
                   ),
                 ],

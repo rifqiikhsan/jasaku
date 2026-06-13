@@ -4,11 +4,7 @@ class IconBtn extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const IconBtn({
-    super.key,
-    required this.icon,
-    required this.onTap,
-  });
+  const IconBtn({super.key, required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,7 @@ class IconBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 6,
               offset: const Offset(0, 2),
             ),

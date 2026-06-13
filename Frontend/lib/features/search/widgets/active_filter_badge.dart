@@ -17,9 +17,9 @@ class ActiveFilterBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: AppTheme.primary.withOpacity(0.08),
+        color: AppTheme.primary.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppTheme.primary.withOpacity(0.3)),
+        border: Border.all(color: AppTheme.primary.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -35,11 +35,7 @@ class ActiveFilterBadge extends StatelessWidget {
           const SizedBox(width: 5),
           GestureDetector(
             onTap: onRemove,
-            child: const Icon(
-              Icons.close,
-              size: 13,
-              color: AppTheme.primary,
-            ),
+            child: const Icon(Icons.close, size: 13, color: AppTheme.primary),
           ),
         ],
       ),

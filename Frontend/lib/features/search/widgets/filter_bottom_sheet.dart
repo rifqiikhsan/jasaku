@@ -40,10 +40,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   }
 
   void _applyFilter() {
-    widget.onApply(FilterState(
-      selectedCategory: _selectedCategory,
-      minRating: _minRating,
-    ));
+    widget.onApply(
+      FilterState(selectedCategory: _selectedCategory, minRating: _minRating),
+    );
     Navigator.pop(context);
   }
 
@@ -58,7 +57,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         24,
         16,
         24,
-        MediaQuery.of(context).viewInsets.bottom + MediaQuery.of(context).padding.bottom + 24,
+        MediaQuery.of(context).viewInsets.bottom +
+            MediaQuery.of(context).padding.bottom +
+            24,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -126,7 +127,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 onTap: () => setState(() => _selectedCategory = cat),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 180),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 9,
+                  ),
                   decoration: BoxDecoration(
                     color: sel ? AppTheme.primary : const Color(0xFFF0F2F7),
                     borderRadius: BorderRadius.circular(30),
@@ -164,9 +168,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
-                  color: _minRating > 0 ? AppTheme.accent.withOpacity(0.12) : const Color(0xFFF0F2F7),
+                  color: _minRating > 0
+                      ? AppTheme.accent.withValues(alpha: 0.12)
+                      : const Color(0xFFF0F2F7),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -174,7 +183,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     Icon(
                       Icons.star_rounded,
                       size: 15,
-                      color: _minRating > 0 ? AppTheme.accent : AppTheme.textHint,
+                      color: _minRating > 0
+                          ? AppTheme.accent
+                          : AppTheme.textHint,
                     ),
                     const SizedBox(width: 4),
                     Text(
@@ -182,7 +193,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: _minRating > 0 ? AppTheme.accent : AppTheme.textHint,
+                        color: _minRating > 0
+                            ? AppTheme.accent
+                            : AppTheme.textHint,
                       ),
                     ),
                   ],
@@ -198,7 +211,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               activeTrackColor: AppTheme.primary,
               inactiveTrackColor: const Color(0xFFE5E7EB),
               thumbColor: AppTheme.primary,
-              overlayColor: AppTheme.primary.withOpacity(0.12),
+              overlayColor: AppTheme.primary.withValues(alpha: 0.12),
               trackHeight: 4,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
             ),
@@ -217,7 +230,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             children: ['Semua', '2.0', '3.0', '4.0', '5.0'].map((l) {
               return Text(
                 l,
-                style: GoogleFonts.poppins(fontSize: 11, color: AppTheme.textHint),
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  color: AppTheme.textHint,
+                ),
               );
             }).toList(),
           ),
