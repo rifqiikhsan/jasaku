@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
       color: AppTheme.background,
       child: Column(
         children: [
-          // ── Header biru ──────────────────────────────────────
+          // ── Header ──────────────────────────────────────
           Container(
             decoration: const BoxDecoration(
               color: AppTheme.primary,
@@ -74,7 +74,8 @@ class HomeScreen extends ConsumerWidget {
                         services: state.filteredServices,
                         isLoading: state.isLoading,
                       ),
-                      if (state.searchQuery.isNotEmpty && state.filteredServices.isEmpty)
+                      if (state.searchQuery.isNotEmpty &&
+                          state.filteredServices.isEmpty)
                         _EmptySearchState(query: state.searchQuery),
                       SizedBox(
                         height: 80 + MediaQuery.of(context).padding.bottom,
@@ -139,9 +140,7 @@ class _LoadingState extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.symmetric(vertical: 48),
-      child: Center(
-        child: CircularProgressIndicator(color: AppTheme.primary),
-      ),
+      child: Center(child: CircularProgressIndicator(color: AppTheme.primary)),
     );
   }
 }

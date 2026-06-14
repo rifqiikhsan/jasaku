@@ -83,35 +83,6 @@ class HomeHeader extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 10),
-          // Avatar
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () {},
-              splashColor: Colors.white.withValues(alpha: 0.2),
-              highlightColor: Colors.white.withValues(alpha: 0.1),
-              child: Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(
-                  child: Text(
-                    'R',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

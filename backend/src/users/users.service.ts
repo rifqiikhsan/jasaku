@@ -66,15 +66,9 @@ export class UsersService {
   async update(id: string, dto: UpdateUserDto) {
     const user = await this.userRepo.findOne({ where: { id } });
 
-    console.log('FIND USER:', user); // cek apakah user ditemukan
-    console.log('UPDATE DTO:', dto); // cek apakah dto terisi
-    console.log('UPDATE ID:', id, typeof id); // cek tipe id
-
     if (!user) throw new NotFoundException('User not found');
 
     const result = await this.userRepo.update(id, { ...dto });
-
-    console.log('UPDATE RESULT:', result); // cek affected rows
 
     return {
       status: 200,

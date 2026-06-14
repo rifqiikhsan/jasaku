@@ -15,11 +15,16 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('JasaKu API')
-    .setDescription('API Documentation JasaKu')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
+  .setTitle('JasaKu API')
+  .setDescription('API Documentation JasaKu')
+  .setVersion('1.0')
+  .addBearerAuth()
+  .setContact(
+  'JasaKu Support',
+  'https://wa.me/6289629814773',
+  'rifqiikhsan45@gmail.com'
+)
+  .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
