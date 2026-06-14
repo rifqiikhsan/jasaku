@@ -123,23 +123,6 @@ flutter build ios --release
 
 ---
 
-## 📦 Dependencies Utama
-
-```yaml
-dependencies:
-  flutter_riverpod: # State management
-  go_router:        # Declarative routing
-  dio:              # HTTP client
-
-dev_dependencies:
-  build_runner:     # Code generation
-  flutter_test:     # Unit & widget testing
-```
-
-> Lihat `pubspec.yaml` untuk daftar versi lengkap.
-
----
-
 ## 📄 Lisensi
 
 Proyek ini dibuat untuk keperluan akademik dan pengembangan pribadi.
