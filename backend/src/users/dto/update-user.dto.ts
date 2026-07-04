@@ -13,6 +13,11 @@ export class UpdateUserDto {
   @IsEmail()
   email?: string;
 
+  @ApiPropertyOptional({ example: '6281234567890' })
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
   @ApiPropertyOptional({ example: 'CUSTOMER', enum: UserRole })
   @IsOptional()
   @IsEnum(UserRole)

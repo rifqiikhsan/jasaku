@@ -21,11 +21,14 @@ export class UsersService {
 
   async create(dto: CreateUserDto) {
     const existing = await this.userRepo.findOne({
-      where: { email: dto.email },
+      where: [
+        { email: dto.email },
+        { phone: dto.phone },
+      ],
     });
 
     if (existing) {
-      throw new BadRequestException('Email already exists');
+      throw new BadRequestException('Email or phone already exists');
     }
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);

@@ -14,11 +14,14 @@ export class User {
   @PrimaryColumn({ type: 'varchar' })
   id!: string;
 
-  @Column()
+  @Column({ })
   fullName!: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   email!: string;
+
+  @Column({ unique: true, nullable: true })
+  phone!: string;
 
   @Column()
   password!: string;

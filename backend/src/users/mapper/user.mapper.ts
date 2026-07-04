@@ -7,6 +7,7 @@ export class UserMapper {
     response.id = user.id;
     response.fullName = user.fullName;
     response.email = user.email;
+    response.phone = user.phone;
     response.role = user.role;
     response.createdAt = user.createdAt;
     response.updatedAt = user.updatedAt;

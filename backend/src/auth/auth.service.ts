@@ -23,11 +23,14 @@ export class AuthService {
 
   async register(dto: RegisterDto) {
     const existingUser = await this.userRepository.findOne({
-      where: { email: dto.email },
-    });
+  where: [
+    { email: dto.email },
+    { phone: dto.phone },
+  ],
+});
 
     if (existingUser) {
-      throw new BadRequestException('Email already exists');
+      throw new BadRequestException('Email or phone already exists');
     }
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
@@ -35,6 +38,7 @@ export class AuthService {
     const user = this.userRepository.create({
       fullName: dto.fullName,
       email: dto.email,
+      phone: dto.phone,
       password: hashedPassword,
       role: dto.role,
     });
@@ -48,32 +52,42 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const user = await this.userRepository.findOne({
-      where: { email: dto.email },
-    });
+  const user = await this.userRepository.findOne({
+    where: { email: dto.email },
+  });
 
-    if (!user) {
-      throw new UnauthorizedException('Email not found');
-    }
-
-    const isMatch = await bcrypt.compare(dto.password, user.password);
-
-    if (!isMatch) {
-      throw new UnauthorizedException('Wrong password');
-    }
-
-    const token = this.jwtService.sign({
-      sub: user.id,
-      email: user.email,
-      role: user.role,
-    });
-
-    return {
-      status: 200,
-      data: {
-        accessToken: token,
-        user: UserMapper.toResponse(user),
-      },
-    };
+  if (!user) {
+    throw new UnauthorizedException('Email not found');
   }
+
+  if (user.role !== dto.role) {
+    throw new UnauthorizedException(
+      `Account is not registered as ${dto.role}`,
+    );
+  }
+
+  const isMatch = await bcrypt.compare(
+    dto.password,
+    user.password,
+  );
+
+  if (!isMatch) {
+    throw new UnauthorizedException('Wrong password');
+  }
+
+  const token = this.jwtService.sign({
+    sub: user.id,
+    email: user.email,
+    role: user.role,
+  });
+
+  return {
+    statusCode: 200,
+    message: 'Login successful',
+    data: {
+      accessToken: token,
+      user: UserMapper.toResponse(user),
+    },
+  };
+}
 }

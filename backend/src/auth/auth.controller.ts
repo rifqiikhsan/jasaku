@@ -75,6 +75,7 @@ export class AuthController {
             id: 1,
             fullName: 'string',
             email: 'string',
+            phone: 'string',
             role: 'string',
             createdAt: 'string',
             updatedAt: 'string',

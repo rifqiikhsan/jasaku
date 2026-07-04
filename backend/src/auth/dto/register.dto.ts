@@ -13,6 +13,10 @@ export class RegisterDto {
   email!: string;
 
   @ApiProperty()
+  @IsString()
+  phone!: string;
+
+  @ApiProperty()
   @MinLength(6)
   password!: string;
 

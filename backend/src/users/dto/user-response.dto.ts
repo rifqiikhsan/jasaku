@@ -11,6 +11,9 @@ export class UserResponse {
   @ApiProperty({ example: 'rifqi@gmail.com' })
   email: string | undefined;
 
+  @ApiProperty({ example: '6281234567890' })
+  phone: string | undefined;
+
   @ApiProperty({ example: 'CUSTOMER' })
   role: UserRole | undefined;
 
