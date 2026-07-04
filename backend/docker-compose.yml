@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: .
+    image: jasaku-api-prod
+    container_name: jasaku-api-prod
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
+    networks:
+      - rifqi-network
+
+networks:
+  rifqi-network:
+    external: true
