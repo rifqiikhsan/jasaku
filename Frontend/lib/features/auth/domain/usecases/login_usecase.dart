@@ -1,0 +1,19 @@
+import 'package:fpdart/fpdart.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../shared/enums/user_role.dart';
+import '../entities/auth_entity.dart';
+import '../repositories/auth_repository.dart';
+
+class LoginUsecase {
+  final AuthRepository _repository;
+
+  const LoginUsecase(this._repository);
+
+  Future<Either<Failure, AuthEntity>> call({
+    required String email,
+    required String password,
+    required UserRole role,
+  }) {
+    return _repository.login(email: email, password: password, role: role);
+  }
+}

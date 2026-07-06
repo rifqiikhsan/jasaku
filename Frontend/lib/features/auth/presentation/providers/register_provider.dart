@@ -1,13 +1,17 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../../../../shared/enums/user_role.dart';
+import '../../data/repositories/auth_repository_impl.dart';
+import '../../../../core/services/notification_service.dart';
 
 // ── State ────────────────────────────────────────────────────────────────────
 
+const _keep = Object();
+
 class RegisterState {
   final UserRole selectedRole;
-  final String name;
+  final String fullName;
   final String email;
   final String phone;
   final String password;
@@ -17,7 +21,7 @@ class RegisterState {
 
   const RegisterState({
     this.selectedRole = UserRole.pencariJasa,
-    this.name = '',
+    this.fullName = '',
     this.email = '',
     this.phone = '',
     this.password = '',
@@ -28,23 +32,25 @@ class RegisterState {
 
   RegisterState copyWith({
     UserRole? selectedRole,
-    String? name,
+    String? fullName,
     String? email,
     String? phone,
     String? password,
     String? confirmPassword,
     bool? isLoading,
-    String? errorMessage,
+    Object? errorMessage = _keep,
   }) {
     return RegisterState(
       selectedRole: selectedRole ?? this.selectedRole,
-      name: name ?? this.name,
+      fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       phone: phone ?? this.phone,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+      errorMessage: errorMessage == _keep
+          ? this.errorMessage
+          : errorMessage as String?,
     );
   }
 }
@@ -52,10 +58,12 @@ class RegisterState {
 // ── Notifier ─────────────────────────────────────────────────────────────────
 
 class RegisterNotifier extends StateNotifier<RegisterState> {
-  RegisterNotifier() : super(const RegisterState());
+  final Ref _ref;
+
+  RegisterNotifier(this._ref) : super(const RegisterState());
 
   void setRole(UserRole role) => state = state.copyWith(selectedRole: role);
-  void setName(String value) => state = state.copyWith(name: value);
+  void setFullName(String value) => state = state.copyWith(fullName: value);
   void setEmail(String value) => state = state.copyWith(email: value);
   void setPhone(String value) => state = state.copyWith(phone: value);
   void setPassword(String value) => state = state.copyWith(password: value);
@@ -70,20 +78,30 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
 
     state = state.copyWith(isLoading: true, errorMessage: null);
 
-    try {
-      // TODO: ganti dengan API call sesuai role (state.selectedRole)
-      await Future.delayed(const Duration(seconds: 2));
-      onSuccess();
-    } catch (e) {
-      state = state.copyWith(errorMessage: e.toString());
-    } finally {
-      state = state.copyWith(isLoading: false);
-    }
+    final result = await _ref
+        .read(registerUsecaseProvider)
+        .call(
+          fullName: state.fullName,
+          email: state.email,
+          phone: state.phone,
+          password: state.password,
+          role: state.selectedRole,
+        );
+
+    result.fold(
+      (failure) => state = state.copyWith(errorMessage: failure.message),
+      (_) {
+        NotificationService.showRegisterSuccess(state.fullName);
+        onSuccess();
+      },
+    );
+
+    state = state.copyWith(isLoading: false);
   }
 }
 
 // ── Provider ─────────────────────────────────────────────────────────────────
 
 final registerProvider = StateNotifierProvider<RegisterNotifier, RegisterState>(
-  (_) => RegisterNotifier(),
+  (ref) => RegisterNotifier(ref),
 );

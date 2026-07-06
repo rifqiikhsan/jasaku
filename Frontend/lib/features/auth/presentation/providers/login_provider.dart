@@ -1,9 +1,15 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jasaku/shared/enums/user_role.dart';
+import 'package:flutter_riverpod/legacy.dart';
+import '../../../../shared/enums/user_role.dart';
+import '../../data/repositories/auth_repository_impl.dart';
+import './auth_state_provider.dart';
+import '../../../../core/services/notification_service.dart';
 
-const _sentinel = Object();
+// ── State ────────────────────────────────────────────────────────────────────
+
+// Sentinel untuk membedakan "tidak dipass" vs "sengaja null"
+const _keep = Object();
 
 class LoginState {
   final UserRole selectedRole;
@@ -28,7 +34,7 @@ class LoginState {
     String? password,
     bool? isPasswordVisible,
     bool? isLoading,
-    Object? errorMessage = _sentinel,
+    Object? errorMessage = _keep,
   }) {
     return LoginState(
       selectedRole: selectedRole ?? this.selectedRole,
@@ -36,49 +42,52 @@ class LoginState {
       password: password ?? this.password,
       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage == _sentinel
+      errorMessage: errorMessage == _keep
           ? this.errorMessage
           : errorMessage as String?,
     );
   }
 }
 
-class LoginNotifier extends Notifier<LoginState> {
-  @override
-  LoginState build() => const LoginState();
+// ── Notifier ─────────────────────────────────────────────────────────────────
+
+class LoginNotifier extends StateNotifier<LoginState> {
+  final Ref _ref;
+
+  LoginNotifier(this._ref) : super(const LoginState());
 
   void setRole(UserRole role) => state = state.copyWith(selectedRole: role);
-
   void setEmail(String value) => state = state.copyWith(email: value);
-
   void setPassword(String value) => state = state.copyWith(password: value);
-
   void togglePasswordVisibility() =>
       state = state.copyWith(isPasswordVisible: !state.isPasswordVisible);
 
   Future<void> login(VoidCallback onSuccess) async {
-    if (state.email.isEmpty || state.password.isEmpty) {
-      state = state.copyWith(errorMessage: 'Email dan kata sandi wajib diisi');
-      return;
-    }
-
-    // ignore: deprecated_member_use
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-
-    if (!emailRegex.hasMatch(state.email.trim())) {
-      state = state.copyWith(errorMessage: 'Format email tidak valid');
-      return;
-    }
-
     state = state.copyWith(isLoading: true, errorMessage: null);
 
-    await Future.delayed(const Duration(seconds: 2));
+    final result = await _ref
+        .read(loginUsecaseProvider)
+        .call(
+          email: state.email,
+          password: state.password,
+          role: state.selectedRole,
+        );
+
+    result.fold(
+      (failure) => state = state.copyWith(errorMessage: failure.message),
+      (auth) {
+        NotificationService.showLoginSuccess(auth.user.fullName);
+        _ref.read(authStateProvider.notifier).setAuthenticated();
+        onSuccess();
+      },
+    );
 
     state = state.copyWith(isLoading: false);
-    onSuccess();
   }
 }
 
-final loginProvider = NotifierProvider.autoDispose<LoginNotifier, LoginState>(
-  LoginNotifier.new,
+// ── Provider ─────────────────────────────────────────────────────────────────
+
+final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>(
+  (ref) => LoginNotifier(ref),
 );

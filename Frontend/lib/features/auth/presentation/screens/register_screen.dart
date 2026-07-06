@@ -73,7 +73,7 @@ class RegisterScreen extends ConsumerWidget {
                         label: 'Daftar',
                         isLoading: state.isLoading,
                         onPressed: () =>
-                            notifier.register(() => context.go('/home')),
+                            notifier.register(() => context.go('/login')),
                       ),
                       const SizedBox(height: 12),
                       AppButton(

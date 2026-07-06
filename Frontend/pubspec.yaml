@@ -17,8 +17,20 @@ dependencies:
   # State Management
   flutter_riverpod: ^3.3.1
 
+  # HTTP
+  dio: ^5.7.0
+
+  # Functional Programming
+  fpdart: ^1.1.0
+
+  # Local Storage
+  flutter_secure_storage: ^9.2.2
+
   # Navigation
   go_router: ^17.3.0
+
+  # Notifications
+  flutter_local_notifications: ^19.0.5
 
   # Maps
   flutter_map: ^7.0.2
@@ -37,6 +49,9 @@ dev_dependencies:
   # Generators
   flutter_native_splash: ^2.4.6
   flutter_launcher_icons: ^0.14.4
+
+  # Logging
+  logger: ^2.4.0
 
 flutter:
   uses-material-design: true

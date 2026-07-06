@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/theme.dart';
+import 'package:jasaku/app/theme.dart';
 import '../providers/register_provider.dart';
 
 class RegisterForm extends ConsumerStatefulWidget {
@@ -43,9 +43,9 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
           controller: _nameController,
           hint: 'Masukkan nama lengkap',
           icon: Icons.person_outline_rounded,
-          onChanged: notifier.setName,
+          onChanged: notifier.setFullName,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         _label('Email'),
         _field(
           controller: _emailController,
@@ -54,7 +54,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
           keyboardType: TextInputType.emailAddress,
           onChanged: notifier.setEmail,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         _label('Nomor HP'),
         _field(
           controller: _phoneController,
@@ -63,7 +63,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
           keyboardType: TextInputType.phone,
           onChanged: notifier.setPhone,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         _label('Password'),
         _field(
           controller: _passwordController,
@@ -83,7 +83,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
                 setState(() => _obscurePassword = !_obscurePassword),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         _label('Konfirmasi Password'),
         _field(
           controller: _confirmPasswordController,
