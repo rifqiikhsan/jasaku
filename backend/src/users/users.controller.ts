@@ -83,7 +83,7 @@ export class UsersController {
         status: 200,
         data: [
           {
-            id: 0,
+            id: 'string',
             fullName: 'string',
             email: 'string',
             phone: 'string',
@@ -109,7 +109,7 @@ export class UsersController {
       example: {
         status: 200,
         data: {
-          id: 0,
+          id: 'string',
           fullName: 'string',
           email: 'string',
           phone: 'string',
@@ -132,10 +132,9 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User updated',
-    schema: { example: { data: '123', status: 200 } },
+    schema: { example: { data: 'string', status: 200 } },
   })
   @ApiCommonErrors()
-  @Put(':id')
   update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return this.usersService.update(id, dto);
   }

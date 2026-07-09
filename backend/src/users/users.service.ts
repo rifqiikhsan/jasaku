@@ -21,10 +21,7 @@ export class UsersService {
 
   async create(dto: CreateUserDto) {
     const existing = await this.userRepo.findOne({
-      where: [
-        { email: dto.email },
-        { phone: dto.phone },
-      ],
+      where: [{ email: dto.email }, { phone: dto.phone }],
     });
 
     if (existing) {
@@ -71,7 +68,7 @@ export class UsersService {
 
     if (!user) throw new NotFoundException('User not found');
 
-    const result = await this.userRepo.update(id, { ...dto });
+    await this.userRepo.update(id, { ...dto });
 
     return {
       status: 200,

@@ -14,7 +14,7 @@ export class User {
   @PrimaryColumn({ type: 'varchar' })
   id!: string;
 
-  @Column({ })
+  @Column({})
   fullName!: string;
 
   @Column({ unique: true, nullable: true })
