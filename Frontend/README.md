@@ -210,15 +210,15 @@ Seluruh data ini otomatis dibersihkan (`clearAll()`) saat pengguna logout.
 
 | Login | Register | Home Customer |
 |---|---|---|
-| ![Login](screenshoot/login.jpg) | ![Register](screenshoot/register.jpg) | ![Home](screenshoot/home.jpg) |
+| <img src="screenshoot/login.jpg" width="250"/> | <img src="screenshoot/register.jpg" width="250"/> | <img src="screenshoot/home.jpg" width="250"/> |
 
 | Search | Search Filter | Notifikasi |
 |---|---|---|
-| ![Search](screenshoot/search.jpg) | ![Search Filter](screenshoot/search-filter.jpg) | ![Notifikasi](screenshoot/notifikasi.jpg) |
+| <img src="screenshoot/search.jpg" width="250"/> | <img src="screenshoot/search-filter.jpg" width="250"/> | <img src="screenshoot/notifikasi.jpg" width="250"/> |
 
 | Show Maps |
 |---|
-| ![Show Maps](screenshoot/show-maps.jpg) |
+| <img src="screenshoot/show-maps.jpg" width="250"/> |
 
 ---
 
