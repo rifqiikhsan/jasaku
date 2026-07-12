@@ -208,15 +208,17 @@ Seluruh data ini otomatis dibersihkan (`clearAll()`) saat pengguna logout.
 
 ## 📸 Screenshot Aplikasi
 
-> _Screenshot akan ditambahkan di sini_
-
-| Login | Home Customer | Search |
+| Login | Register | Home Customer |
 |---|---|---|
-| _(screenshot)_ | _(screenshot)_ | _(screenshot)_ |
+| ![Login](screenshoot/login.jpg) | ![Register](screenshoot/register.jpg) | ![Home](screenshoot/home.jpg) |
 
-| Home Provider | Profile | Notifikasi |
+| Search | Search Filter | Notifikasi |
 |---|---|---|
-| _(screenshot)_ | _(screenshot)_ | _(screenshot)_ |
+| ![Search](screenshoot/search.jpg) | ![Search Filter](screenshoot/search-filter.jpg) | ![Notifikasi](screenshoot/notifikasi.jpg) |
+
+| Show Maps |
+|---|
+| ![Show Maps](screenshoot/show-maps.jpg) |
 
 ---
 
