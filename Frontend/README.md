@@ -150,7 +150,7 @@ lib/
 
 | Fitur | Status |
 |---|---|
-| Login & Role Selector (Customer / Provider) | ✅ Done UI & API |
+| Login Register & Role Selector (Customer / Provider) | ✅ Done UI & API |
 | Logout (clear session + local storage) | ✅ Done UI & API |
 | Home Switcher (redirect otomatis sesuai role) | ✅ Done |
 | Home Customer (kategori, banner promo, list jasa) | ✅ Done UI & API |
