@@ -58,7 +58,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
         _label('Nomor HP'),
         _field(
           controller: _phoneController,
-          hint: 'Contoh: 08xxxxxxxxxx',
+          hint: 'Contoh: 628xxxxxxxxxx',
           icon: Icons.phone_outlined,
           keyboardType: TextInputType.phone,
           onChanged: notifier.setPhone,

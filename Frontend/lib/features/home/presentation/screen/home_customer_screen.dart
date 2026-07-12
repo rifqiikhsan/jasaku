@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jasaku/features/home/presentation/providers/category_provider.dart';
+import 'package:jasaku/features/home/presentation/providers/service_provider.dart';
+import 'package:jasaku/features/home/presentation/screen/home_switcher_screen.dart';
 import '../../../../app/theme.dart';
+import '../../../../core/providers/location_provider.dart';
 import '../../../../shared/widgets/app_search_bar.dart';
 import '../providers/home_provider.dart';
 import '../widgets/banner_promo.dart';
@@ -9,13 +13,38 @@ import '../widgets/category_section.dart';
 import '../widgets/home_header.dart';
 import '../widgets/service_section.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class HomeCustomerScreen extends ConsumerStatefulWidget {
+  const HomeCustomerScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeCustomerScreen> createState() => _HomeCustomerScreenState();
+}
+
+class _HomeCustomerScreenState extends ConsumerState<HomeCustomerScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(locationProvider.notifier).requestAndFetchLocation();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(homeProvider);
     final notifier = ref.read(homeProvider.notifier);
+    final categoryAsync = ref.watch(categoryListProvider);
+    final serviceAsync = ref.watch(serviceListProvider);
+    final userNameAsync = ref.watch(homeUFullNameProvider);
+    final locationState = ref.watch(locationProvider);
+
+    final locationText = locationState.isLoading
+        ? 'Mencari lokasi...'
+        : locationState.errorMessage != null
+        ? locationState.errorMessage!
+        : locationState.city != null && locationState.province != null
+        ? '${locationState.city}, ${locationState.province}'
+        : 'Lokasi tidak tersedia';
 
     return Material(
       color: AppTheme.background,
@@ -35,8 +64,8 @@ class HomeScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   HomeHeader(
-                    userName: state.userName,
-                    location: state.location,
+                    userName: userNameAsync.value ?? 'Pengguna',
+                    location: locationText,
                   ),
                   const SizedBox(height: 16),
                   Padding(
@@ -68,11 +97,11 @@ class HomeScreen extends ConsumerWidget {
                     else if (state.isLoading)
                       const _LoadingState()
                     else ...[
-                      CategorySection(categories: state.categories),
+                      CategorySection(categories: categoryAsync.value ?? []),
                       const BannerPromo(),
                       ServiceSection(
-                        services: state.filteredServices,
-                        isLoading: state.isLoading,
+                        services: serviceAsync.value ?? [],
+                        isLoading: serviceAsync.isLoading,
                       ),
                       if (state.searchQuery.isNotEmpty &&
                           state.filteredServices.isEmpty)

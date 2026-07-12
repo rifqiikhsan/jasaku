@@ -76,8 +76,9 @@ class LoginScreen extends ConsumerWidget {
                       AppButton(
                         label: 'Masuk',
                         isLoading: state.isLoading,
-                        onPressed: () =>
-                            notifier.login(() => context.go('/home')),
+                        onPressed: () {
+                          notifier.login(() => context.go('/home'));
+                        },
                       ),
                       const SizedBox(height: 12),
                       AppButton(

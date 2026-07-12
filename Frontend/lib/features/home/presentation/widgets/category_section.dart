@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jasaku/features/home/domain/entities/category_entity.dart';
 import '../../../../app/theme.dart';
-import '../providers/home_provider.dart';
 import 'category_item.dart';
 
 class CategorySection extends StatelessWidget {
-  final List<CategoryModel> categories;
-
+  final List<CategoryEntity> categories;
   const CategorySection({super.key, required this.categories});
 
   @override
@@ -46,8 +45,12 @@ class CategorySection extends StatelessWidget {
             children: categories
                 .take(5)
                 .map(
-                  (c) =>
-                      CategoryItem(icon: c.icon, label: c.label, onTap: () {}),
+                  (c) => CategoryItem(
+                    icon: c.catEmoji ?? '',
+                    label: c.catDesc ?? '',
+                    color: c.catColor,
+                    onTap: () {},
+                  ),
                 )
                 .toList(),
           ),

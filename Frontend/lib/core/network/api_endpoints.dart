@@ -10,6 +10,10 @@ class ApiEndpoints {
   static const String refresh = '/auth/refresh';
   static const String profile = '/auth/profile';
 
+  // ── Category ────────────────────────────────────────────────
+  static const String categories = '/categories';
+  static String categoryDetail(String id) => '/categories/$id';
+
   // ── Jasa ────────────────────────────────────────────────
   static const String services = '/services';
   static String serviceDetail(String id) => '/services/$id';

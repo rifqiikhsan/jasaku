@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:jasaku/features/home/domain/entities/service_entity.dart';
+import 'package:jasaku/shared/extensions/color_extension.dart';
 import '../../../../app/theme.dart';
-import '../providers/home_provider.dart';
 
 class ServiceCard extends StatelessWidget {
-  final ServiceModel service;
+  final ServiceEntity service;
   final VoidCallback? onTap;
 
   const ServiceCard({super.key, required this.service, this.onTap});
 
-  String _formatPrice(int price) {
-    final rb = price ~/ 1000;
-    return '${rb}rb';
-  }
+  // String _formatPrice(int price) {
+  //   final rb = price ~/ 1000;
+  //   return '${rb}rb';
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +38,12 @@ class ServiceCard extends StatelessWidget {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEFF6FF),
+                    color: service.emojiColor.toColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
                     child: Text(
-                      service.icon,
+                      service.emoji!,
                       style: const TextStyle(fontSize: 28),
                     ),
                   ),
@@ -53,7 +54,7 @@ class ServiceCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        service.name,
+                        service.serviceName!,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
@@ -62,7 +63,11 @@ class ServiceCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        service.description,
+                        service.category
+                                ?.map((e) => e.catDesc)
+                                .whereType<String>()
+                                .join(' & ') ??
+                            '-',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Color(0xFF888888),
@@ -72,7 +77,7 @@ class ServiceCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${service.distance} km',
+                            '${service.distance}',
                             style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xFF555555),
@@ -86,7 +91,7 @@ class ServiceCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 2),
                           Text(
-                            '${service.rating}',
+                            '${service.summaryRating}',
                             style: const TextStyle(
                               fontSize: 12,
                               color: AppTheme.accent,
@@ -95,7 +100,7 @@ class ServiceCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '(${service.reviewCount} Ulasan)',
+                            '(${service.totalReviews} Ulasan)',
                             style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xFF888888),
@@ -110,7 +115,7 @@ class ServiceCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    if (service.isVerified)
+                    if (service.isVerification == 'Y')
                       const Text(
                         'Terverifikasi',
                         style: TextStyle(
@@ -119,13 +124,14 @@ class ServiceCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    if (service.isVerified) const SizedBox(height: 4),
+                    if (service.isVerification == 'Y')
+                      const SizedBox(height: 4),
                     const Text(
                       'Mulai Dari',
                       style: TextStyle(fontSize: 11, color: Color(0xFF888888)),
                     ),
                     Text(
-                      _formatPrice(service.price),
+                      '${service.priceMinimum}',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,

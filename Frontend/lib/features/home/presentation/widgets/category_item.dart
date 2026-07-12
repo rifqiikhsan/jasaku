@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:jasaku/app/theme.dart';
+import 'package:jasaku/shared/extensions/color_extension.dart';
 
 class CategoryItem extends StatelessWidget {
   final String icon;
   final String label;
+  final String? color;
   final VoidCallback? onTap;
 
   const CategoryItem({
     super.key,
     required this.icon,
     required this.label,
+    this.color,
     this.onTap,
   });
 
@@ -27,17 +30,12 @@ class CategoryItem extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: color.toColor.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: const Color(0xFFEEEEEE),
-              ),
+              border: Border.all(color: const Color(0xFFEEEEEE)),
             ),
             child: Center(
-              child: Text(
-                icon,
-                style: const TextStyle(fontSize: 28),
-              ),
+              child: Text(icon, style: const TextStyle(fontSize: 28)),
             ),
           ),
         ),

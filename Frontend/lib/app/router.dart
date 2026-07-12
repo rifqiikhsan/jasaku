@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jasaku/features/home/presentation/screen/home_customer_screen.dart';
+import 'package:jasaku/features/home/presentation/screen/home_provider_screen.dart';
+import 'package:jasaku/features/home/presentation/screen/home_switcher_screen.dart';
 import 'package:jasaku/features/profile/presentation/screen/profile_screen.dart';
 import '../features/auth/presentation/providers/auth_state_provider.dart';
 import '../features/auth/presentation/screens/login_screen.dart';
 import '../features/auth/presentation/screens/register_screen.dart';
 import '../features/chat/chat_screen.dart';
-import '../features/home/presentation/screen/home_screen.dart';
 import '../features/search/presentation/screen/search_screen.dart';
 import '../features/splash/splash_screen.dart';
 import '../shared/widgets/main_shell.dart';
@@ -67,7 +69,17 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/home',
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: HomeScreen()),
+                const NoTransitionPage(child: HomeSwitcherScreen()),
+          ),
+          GoRoute(
+            path: '/home-customer',
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: HomeCustomerScreen()),
+          ),
+          GoRoute(
+            path: '/home-provider',
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: HomeProviderScreen()),
           ),
           GoRoute(
             path: '/chat',

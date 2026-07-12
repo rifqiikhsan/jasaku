@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:jasaku/features/auth/presentation/providers/auth_state_provider.dart';
+import 'package:jasaku/features/auth/presentation/providers/login_provider.dart';
+import 'package:jasaku/features/home/presentation/screen/home_switcher_screen.dart';
 import '../../../../core/storage/secure_storage.dart';
 
 class LogoutNotifier extends StateNotifier<bool> {
@@ -13,7 +15,12 @@ class LogoutNotifier extends StateNotifier<bool> {
   Future<void> logout(VoidCallback onSuccess) async {
     state = true;
     await _ref.read(secureStorageProvider).clearAll();
-    _ref.read(authStateProvider.notifier).setUnauthenticated();
+    _ref.invalidate(homeUserRoleProvider);
+    _ref.invalidate(homeUFullNameProvider);
+    _ref.invalidate(loginProvider);
+    _ref
+        .read(authStateProvider.notifier)
+        .setUnauthenticated(); // trigger redirect terakhir
     state = false;
     onSuccess();
   }

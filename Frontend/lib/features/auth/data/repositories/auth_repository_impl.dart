@@ -33,6 +33,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await _storage.saveAccessToken(res.data.accessToken);
       await _storage.saveUserRole(res.data.user.role);
       await _storage.saveUserId(res.data.user.id.toString());
+      await _storage.saveFullName(res.data.user.fullName);
 
       return Right(res.toEntity());
     } on AppException catch (e) {

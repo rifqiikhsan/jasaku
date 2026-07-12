@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jasaku/features/home/domain/entities/service_entity.dart';
 import '../../../../app/theme.dart';
-import '../providers/home_provider.dart';
 import 'service_card.dart';
 
 class ServiceSection extends StatelessWidget {
-  final List<ServiceModel> services;
+  final List<ServiceEntity> services;
   final bool isLoading;
 
   const ServiceSection({

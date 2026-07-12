@@ -5,6 +5,7 @@ import '../../../../shared/enums/user_role.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import './auth_state_provider.dart';
 import '../../../../core/services/notification_service.dart';
+import '../../../home/presentation/screen/home_switcher_screen.dart';
 
 // ── State ────────────────────────────────────────────────────────────────────
 
@@ -77,7 +78,11 @@ class LoginNotifier extends StateNotifier<LoginState> {
       (failure) => state = state.copyWith(errorMessage: failure.message),
       (auth) {
         NotificationService.showLoginSuccess(auth.user.fullName);
-        _ref.read(authStateProvider.notifier).setAuthenticated();
+        _ref.invalidate(homeUserRoleProvider);
+        _ref.invalidate(homeUFullNameProvider);
+        _ref
+            .read(authStateProvider.notifier)
+            .setAuthenticated(); // baru trigger redirect
         onSuccess();
       },
     );

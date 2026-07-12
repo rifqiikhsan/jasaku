@@ -21,11 +21,14 @@ class HomeHeader extends StatelessWidget {
                   children: [
                     const Icon(Icons.location_on, color: Colors.red, size: 16),
                     const SizedBox(width: 4),
-                    Text(
-                      location,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 13,
+                    Expanded(
+                      child: Text(
+                        location,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 13,
+                        ),
+                        overflow: TextOverflow.clip,
                       ),
                     ),
                   ],
